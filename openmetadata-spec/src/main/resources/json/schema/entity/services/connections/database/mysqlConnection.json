@@ -85,15 +85,6 @@
       "title": "Connection Arguments",
       "$ref": "../connectionBasicType.json#/definitions/connectionArguments"
     },
-    "defaultExcludeSchemas": {
-      "title": "Exclude Default Schemas",
-      "description": "List of default schemas to exclude in ingestion.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "default": ["^information_schema$", "^performance_schema$"]
-    },
     "filters":{
       "$ref": "../../../../metadataIngestion/databaseServiceMetadataPipeline.json#/definitions/filters",
       "schemaFilterPattern":{

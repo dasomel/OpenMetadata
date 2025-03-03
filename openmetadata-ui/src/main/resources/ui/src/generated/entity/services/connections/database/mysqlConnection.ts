@@ -31,11 +31,7 @@ export interface MysqlConnection {
      * attempts to scan all the schemas.
      */
     databaseSchema?: string;
-    /**
-     * List of default schemas to exclude in ingestion.
-     */
-    defaultExcludeSchemas?: string[];
-    filters?:               Filters;
+    filters?:        Filters;
     /**
      * Host and port of the MySQL service.
      */
