@@ -1,5 +1,5 @@
 /*
- *  Copyright 2024 Collate.
+ *  Copyright 2025 Collate.
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -10,9 +10,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-
- /**
+/**
  * This schema defines the Dashboard Service entity, such as Looker and Superset.
  */
 export interface DashboardService {
@@ -53,6 +51,14 @@ export interface DashboardService {
      * Unique identifier of this dashboard service instance.
      */
     id: string;
+    /**
+     * Change that lead to this version of the entity.
+     */
+    incrementalChangeDescription?: ChangeDescription;
+    /**
+     * The ingestion agent responsible for executing the ingestion pipeline.
+     */
+    ingestionAgent?: EntityReference;
     /**
      * Name that identifies this dashboard service.
      */
@@ -1183,6 +1189,8 @@ export enum DashboardServiceType {
  * the relationship of a table `belongs to a` database.
  *
  * Domain the Dashboard service belongs to.
+ *
+ * The ingestion agent responsible for executing the ingestion pipeline.
  */
 export interface EntityReference {
     /**
