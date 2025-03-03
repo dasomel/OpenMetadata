@@ -55,6 +55,7 @@ import org.openmetadata.schema.entity.events.SubscriptionStatus;
 import org.openmetadata.schema.metadataIngestion.DatabaseServiceMetadataPipeline;
 import org.openmetadata.schema.metadataIngestion.FilterPattern;
 import org.openmetadata.schema.metadataIngestion.SourceConfig;
+import org.openmetadata.schema.services.connections.database.Filters;
 import org.openmetadata.schema.type.ChangeDescription;
 import org.openmetadata.schema.type.ChangeEvent;
 import org.openmetadata.schema.type.EventType;
@@ -1250,10 +1251,15 @@ public class EventSubscriptionResourceTest
         new DatabaseServiceMetadataPipeline()
             .withMarkDeletedTables(true)
             .withIncludeViews(true)
-            .withSchemaFilterPattern(
-                new FilterPattern().withExcludes(List.of("information_schema.*", "test.*")))
-            .withTableFilterPattern(
-                new FilterPattern().withIncludes(List.of("sales.*", "users.*")));
+            .withFilters(
+                new Filters()
+                    .withSchemaFilterPattern(
+                        new FilterPattern()
+                            .withExcludes(List.of("information_schema.*", "test.*"))))
+            .withFilters(
+                new Filters()
+                    .withTableFilterPattern(
+                        new FilterPattern().withIncludes(List.of("sales.*", "users.*"))));
 
     SourceConfig sourceConfig = new SourceConfig().withConfig(databaseServiceMetadataPipeline);
     request.withSourceConfig(sourceConfig);
@@ -1303,10 +1309,15 @@ public class EventSubscriptionResourceTest
         new DatabaseServiceMetadataPipeline()
             .withMarkDeletedTables(true)
             .withIncludeViews(true)
-            .withSchemaFilterPattern(
-                new FilterPattern().withExcludes(List.of("information_schema.*", "test.*")))
-            .withTableFilterPattern(
-                new FilterPattern().withIncludes(List.of("sales.*", "users.*")));
+            .withFilters(
+                new Filters()
+                    .withSchemaFilterPattern(
+                        new FilterPattern()
+                            .withExcludes(List.of("information_schema.*", "test.*"))))
+            .withFilters(
+                new Filters()
+                    .withTableFilterPattern(
+                        new FilterPattern().withIncludes(List.of("sales.*", "users.*"))));
 
     SourceConfig sourceConfig = new SourceConfig().withConfig(databaseServiceMetadataPipeline);
     request.withSourceConfig(sourceConfig).withOwners(List.of(USER_TEAM21.getEntityReference()));

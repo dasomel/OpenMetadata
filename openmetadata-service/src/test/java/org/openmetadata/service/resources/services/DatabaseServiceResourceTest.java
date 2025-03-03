@@ -63,6 +63,7 @@ import org.openmetadata.schema.metadataIngestion.SourceConfig;
 import org.openmetadata.schema.services.connections.database.BigQueryConnection;
 import org.openmetadata.schema.services.connections.database.ConnectionArguments;
 import org.openmetadata.schema.services.connections.database.ConnectionOptions;
+import org.openmetadata.schema.services.connections.database.Filters;
 import org.openmetadata.schema.services.connections.database.MysqlConnection;
 import org.openmetadata.schema.services.connections.database.RedshiftConnection;
 import org.openmetadata.schema.services.connections.database.SnowflakeConnection;
@@ -281,10 +282,16 @@ public class DatabaseServiceResourceTest
         new DatabaseServiceMetadataPipeline()
             .withMarkDeletedTables(true)
             .withIncludeViews(true)
-            .withSchemaFilterPattern(
-                new FilterPattern().withExcludes(List.of("information_schema.*", "test.*")))
-            .withTableFilterPattern(
-                new FilterPattern().withIncludes(List.of("sales.*", "users.*")));
+            .withFilters(
+                new Filters()
+                    .withSchemaFilterPattern(
+                        new FilterPattern()
+                            .withExcludes(List.of("information_schema.*", "test.*"))))
+            .withFilters(
+                new Filters()
+                    .withTableFilterPattern(
+                        new FilterPattern()
+                            .withIncludes(List.of("information_schema.*", "test.*"))));
 
     SourceConfig sourceConfig = new SourceConfig().withConfig(databaseServiceMetadataPipeline);
     createIngestionPipeline.withSourceConfig(sourceConfig);
